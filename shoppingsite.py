@@ -75,7 +75,7 @@ def show_shopping_cart():
     #
     # Make sure your function can also handle the case wherein no cart has
     # been added to the session
-    cart = session["cart"]
+    cart = session.get("cart", {})
     cart_list = []
     tally = 0
     for melon_id in cart:

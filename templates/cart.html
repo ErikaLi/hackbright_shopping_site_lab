@@ -1,8 +1,14 @@
 
 {% extends 'base.html' %}
-
+{% block title %}Cart{% endblock %}
 {% block body %}
 
+{% if cart_list == [] %}
+    Your cart is empty!<br>
+    <a href="/melons" class="btn btn-large btn-primary">Shop Now!</a>
+{% endif %}
+
+{% if cart_list != [] %}
     <table class="table table-striped">
         <thead>
         <tr>
@@ -13,14 +19,15 @@
         </tr>
         </thead>
         <tbody>
-        {% for melon in cart_list %}
-        <tr>
-            <td>{{ melon.common_name }}</td>
-            <td>{{ melon.quantity }}</td>
-            <td>{{ melon.price_str() }}</td>
-            <td>{{ melon.total_price }}</td>
-        </tr>
-        {% endfor %}
+        
+            {% for melon in cart_list %}
+            <tr>
+                <td>{{ melon.common_name }}</td>
+                <td>{{ melon.quantity }}</td>
+                <td>{{ melon.price_str() }}</td>
+                <td>{{ melon.total_price }}</td>
+            </tr>
+            {% endfor %}
 
         </tbody>
     </table>
@@ -28,5 +35,6 @@
     <h3>Total: {{ tally }}</h3>
 
     <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
+{% endif %}
 
 {% endblock %}
